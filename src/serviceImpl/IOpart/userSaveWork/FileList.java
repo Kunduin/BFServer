@@ -25,8 +25,33 @@ public class FileList {
         return true;
     }
 
-    public boolean deleteFile(String filename,String language) throws IOException{
-        
+    public boolean checkFile(String filename) throws IOException{
+        ArrayList<String> eachFileName=readList();
+        ArrayList<String> singleName=new ArrayList<>();
+        for(String e:eachFileName){
+            String[] detail=e.split("######");
+            singleName.add(detail[0]);
+        }
+        return singleName.contains(filename);
+    }
+
+    public boolean deleteFile(String filename) throws IOException{
+        ArrayList<String> eachFileName=readList();
+        for(String e:eachFileName){
+            String[] detail=e.split("######");
+            if(detail[0]==filename){
+                eachFileName.remove(e);
+                break;
+            }
+        }
+        FileWriter fileWriter=new FileWriter(listFilePath);
+        BufferedWriter writer=new BufferedWriter(fileWriter);
+        for(String e:eachFileName){
+            writer.write(e);
+            writer.flush();
+            writer.newLine();
+            writer.close();
+        }
         return true;
     }
 
