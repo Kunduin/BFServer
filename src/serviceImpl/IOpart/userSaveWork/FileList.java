@@ -1,5 +1,8 @@
 package serviceImpl.IOpart.userSaveWork;
 
+import serviceImpl.IOpart.CurrentProject;
+import serviceImpl.IOpart.easyToIO.ReadAndWrite;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -9,60 +12,62 @@ import java.util.ArrayList;
 public class FileList {
     private String username;
     private String listFilePath;
+    private String splitSign;
 
     public FileList(String username){
         this.username=username;
         this.listFilePath=username+".fileList";
+        this.splitSign="######";
+    }
+
+    public ArrayList getFileList() throws IOException{
+        return ReadAndWrite.read(listFilePath);
     }
 
     public boolean newFile(String filename,String language,String time) throws IOException {
-        FileWriter fileWriter=new FileWriter(listFilePath,true);
-        BufferedWriter writer=new BufferedWriter(fileWriter);
-        writer.write(filename+"######"+language+"######"+time);
-        writer.flush();
-        writer.newLine();
-        writer.close();
+        String theLine=filename+splitSign+language+splitSign+time;
+        ReadAndWrite.write(listFilePath,theLine);
+        return true;
+    }
+    public boolean newFile(CurrentProject currentProject,String time) throws IOException{
+        String theLine=currentProject.getFilename()+splitSign+currentProject.getLanguage()+splitSign+time;
+        ReadAndWrite.write(listFilePath,theLine);
+        return true;
+    }
+
+    public boolean updateFile(String filename,String language,String time) throws IOException{
+        deleteFile(filename);
+        newFile(filename,language,time);
+        return true;
+    }
+    public boolean updateFile(CurrentProject currentProject,String time) throws IOException{
+        deleteFile(currentProject.getFilename());
+        newFile(currentProject,time);
         return true;
     }
 
     public boolean checkFile(String filename) throws IOException{
-        ArrayList<String> eachFileName=readList();
+        ArrayList<String> eachFileName= ReadAndWrite.read(listFilePath);
         ArrayList<String> singleName=new ArrayList<>();
         for(String e:eachFileName){
-            String[] detail=e.split("######");
+            String[] detail=e.split(splitSign);
             singleName.add(detail[0]);
         }
         return singleName.contains(filename);
     }
 
     public boolean deleteFile(String filename) throws IOException{
-        ArrayList<String> eachFileName=readList();
+        ArrayList<String> eachFileName=ReadAndWrite.read(listFilePath);
         for(String e:eachFileName){
-            String[] detail=e.split("######");
-            if(detail[0]==filename){
+            String[] detail=e.split(splitSign);
+            if(detail[0].equals(filename)){
                 eachFileName.remove(e);
                 break;
             }
         }
-        FileWriter fileWriter=new FileWriter(listFilePath);
-        BufferedWriter writer=new BufferedWriter(fileWriter);
-        for(String e:eachFileName){
-            writer.write(e);
-            writer.flush();
-            writer.newLine();
-            writer.close();
-        }
+        ReadAndWrite.write(listFilePath,eachFileName);
+
         return true;
     }
 
-    private ArrayList readList() throws IOException {
-        ArrayList<String> eachFileName=new ArrayList<>();
-        FileReader fileReader=new FileReader(listFilePath);
-        BufferedReader reader=new BufferedReader(fileReader);
-        String line;
-        while ((line=reader.readLine())!=null){
-            eachFileName.add(line);
-        }
-        return eachFileName;
-    }
 }

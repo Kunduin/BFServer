@@ -1,4 +1,7 @@
 package serviceImpl.executePart.commends;
+import serviceImpl.IOpart.userSaveWork.FileList;
+import serviceImpl.IOpart.userSaveWork.UserSaveFile;
+
 import java.util.ArrayList;
 
 /**
@@ -141,6 +144,14 @@ public class Operator {
 //                "Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook! Ook. Ook? Ook. ");
 //
 //        System.out.println(executeService.execute(ook,"","Ook","~"));
+//        FileList fileList=new FileList("bay");
+//        fileList.newFile("abc","Ook","12:33");
+//        fileList.updateFile("abc","Ook","123:42");
+//        System.out.println(fileList.checkFile("abc"));
+        UserSaveFile userSaveFile=new UserSaveFile("bay","abc","Ook");
+        userSaveFile.saveFile("asfddsadasdfads","12:99");
+        System.out.println(userSaveFile.readFile("12:99"));
+
     }
 
 }

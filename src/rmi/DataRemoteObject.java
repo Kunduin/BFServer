@@ -43,6 +43,41 @@ public class DataRemoteObject extends UnicastRemoteObject implements IOService, 
 	}
 
 	@Override
+	public boolean newProject(String userId, String filename, String language) throws RemoteException {
+		return false;
+	}
+
+	@Override
+	public boolean deleteProject(String userId, String filename, String language) throws RemoteException {
+		return false;
+	}
+
+	@Override
+	public boolean userSave(String userId, String time) throws RemoteException {
+		return false;
+	}
+
+	@Override
+	public String versionControl(String userId, String time) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public boolean autoSave(String userId, String time) throws RemoteException {
+		return false;
+	}
+
+	@Override
+	public String undo(String userId, String count) throws RemoteException {
+		return null;
+	}
+
+	@Override
+	public boolean cover(String userId, String count) throws RemoteException {
+		return false;
+	}
+
+	@Override
 	public boolean login(String username, String password) throws RemoteException {
 		// TODO Auto-generated method stub
 		return userService.login(username, password);
