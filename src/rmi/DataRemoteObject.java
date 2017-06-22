@@ -1,5 +1,6 @@
 package rmi;
 
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -43,42 +44,42 @@ public class DataRemoteObject extends UnicastRemoteObject implements IOService, 
 	}
 
 	@Override
-	public boolean newProject(String userId, String filename, String language) throws RemoteException {
-		return false;
+	public boolean newProject(String userId, String filename, String language) throws IOException {
+		return iOService.newProject(userId,filename,language);
 	}
 
 	@Override
-	public boolean deleteProject(String userId, String filename, String language) throws RemoteException {
-		return false;
+	public boolean deleteProject(String userId, String filename, String language) throws IOException {
+		return iOService.deleteProject(userId,filename,language);
 	}
 
 	@Override
-	public boolean userSave(String userId, String time) throws RemoteException {
-		return false;
+	public boolean userSave(String userId, String code,String time) throws IOException {
+		return iOService.userSave(userId,code,time);
 	}
 
 	@Override
-	public String versionControl(String userId, String time) throws RemoteException {
-		return null;
+	public String versionControl(String userId, String time) throws IOException {
+		return iOService.versionControl(userId,time);
 	}
 
 	@Override
-	public boolean autoSave(String userId, String time) throws RemoteException {
-		return false;
+	public boolean autoSave(String userId,String code, String time) throws IOException {
+		return iOService.autoSave(userId,code,time);
 	}
 
 	@Override
-	public String undo(String userId, String count) throws RemoteException {
-		return null;
+	public String undo(String userId, int count) throws IOException {
+		return iOService.undo(userId,count);
 	}
 
 	@Override
-	public boolean cover(String userId, String count) throws RemoteException {
-		return false;
+	public boolean cover(String userId, int count) throws IOException {
+		return iOService.cover(userId,count);
 	}
 
 	@Override
-	public boolean login(String username, String password) throws RemoteException {
+	public boolean login(String username, String password) throws IOException {
 		// TODO Auto-generated method stub
 		return userService.login(username, password);
 	}
@@ -90,12 +91,12 @@ public class DataRemoteObject extends UnicastRemoteObject implements IOService, 
 	}
 
 	@Override
-	public boolean signUp(String username, String password) throws RemoteException {
+	public boolean signUp(String username, String password) throws IOException {
 		return userService.signUp(username,password);
 	}
 
 	@Override
-	public boolean deleteId(String username) throws RemoteException {
+	public boolean deleteId(String username) throws IOException {
 		return userService.deleteId(username);
 	}
 

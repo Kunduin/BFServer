@@ -31,7 +31,11 @@ public class AutoSaveFile {
     }
     public String getOldVersion(int count) throws IOException{
         ArrayList<String> eachLineDetail=ReadAndWrite.read(filePath);
-        return null;
+        if(count>eachLineDetail.size()-1){
+            return "#"+String.valueOf(count-eachLineDetail.size()+1);
+        }else {
+            return eachLineDetail.get(eachLineDetail.size()-count-1);
+        }
     }
 
     public boolean coverVersion(int count) throws IOException{
@@ -41,8 +45,9 @@ public class AutoSaveFile {
                 eachLineDetail.remove(eachLineDetail.size() - 1);
             }
             ReadAndWrite.write(filePath, eachLineDetail);
+            return true;
         }
-        return true;
+        return false;
     }
 
 }

@@ -35,8 +35,4 @@ public class ExecuteServiceImpl implements ExecuteService {
 		map.put(userId,operator);
 		return operator.getResult();
 	}
-
-
-
-
 }
