@@ -1,5 +1,8 @@
 package serviceImpl.userPart.userArrengement;
 
+import service.UserService;
+import serviceImpl.userPart.UserServiceImpl;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,13 +56,15 @@ public class AllTheUser {
     }
 
     public static void main(String[] args) throws IOException{
-        addAUser("bay","123454");
-        addAUser("xxz","123454");
-        addAUser("xxt","123454");
-        System.out.println(hasTheUser("xxz"));
-        deleteId("xxz");
-        System.out.println(checkThePassword("bay","e3214"));
-
+//        addAUser("bay","123454");
+//        addAUser("xxz","123454");
+//        addAUser("xxt","123454");
+//        System.out.println(hasTheUser("xxz"));
+//        deleteId("xxz");
+//        System.out.println(checkThePassword("bay","e3214"));
+//        System.out.println(checkThePassword("bay","123454"));
+        UserService userService=new UserServiceImpl();
+        System.out.println(userService.login("bay","123454"));
 
     }
 }

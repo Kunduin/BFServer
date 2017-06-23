@@ -79,7 +79,7 @@ public class DataRemoteObject extends UnicastRemoteObject implements IOService, 
 	}
 
 	@Override
-	public boolean login(String username, String password) throws IOException {
+	public String login(String username, String password) throws IOException {
 		// TODO Auto-generated method stub
 		return userService.login(username, password);
 	}

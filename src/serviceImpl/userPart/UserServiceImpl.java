@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 
+import agreement.LoginAgreement;
 import service.UserService;
 import serviceImpl.userPart.userArrengement.AllTheUser;
 import serviceImpl.userPart.userArrengement.CurrentUser;
@@ -12,16 +13,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public boolean login(String username, String password) throws IOException {
+    public String login(String username, String password) throws IOException {
+        System.out.println("????");
         if (!AllTheUser.hasTheUser(username)) {
-            return false;
+            return LoginAgreement.USERID_ABSENCE;
         } else if (!AllTheUser.checkThePassword(username, password)) {
-            return false;
-        } else if (!CurrentUser.hasTheCurrentUser(username)) {
-            return false;
+            return LoginAgreement.PASSWORD_WRONG;
+        } else if (CurrentUser.hasTheCurrentUser(username)) {
+            return LoginAgreement.CURRENT_USER_EXIST;
         } else {
             CurrentUser.addACurrentUser(username);
-            return true;
+            return LoginAgreement.LOGIN_SUCCESS;
         }
 
     }
