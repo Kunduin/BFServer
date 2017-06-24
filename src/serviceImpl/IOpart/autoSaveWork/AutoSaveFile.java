@@ -1,5 +1,6 @@
 package serviceImpl.IOpart.autoSaveWork;
 
+import agreement.IOAgreement;
 import serviceImpl.IOpart.easyToIO.ReadAndWrite;
 import serviceImpl.IOpart.userSaveWork.FileList;
 
@@ -15,12 +16,14 @@ public class AutoSaveFile {
     private String language;
     private String filePath;
     private String splitSign;
+    private String alarmingSign;
 
     public AutoSaveFile(String username, String filename,String language){
         this.username=username;
         this.filename=filename;
         this.language=language;
-        this.splitSign="######";
+        this.splitSign= IOAgreement.SPLIT_SIGN;
+        this.alarmingSign=IOAgreement.ALARMING_SIGN;
         this.filePath=username+"."+filename+"."+language+".AutoSaveFile";
     }
 
@@ -32,7 +35,7 @@ public class AutoSaveFile {
     public String getOldVersion(int count) throws IOException{
         ArrayList<String> eachLineDetail=ReadAndWrite.read(filePath);
         if(count>eachLineDetail.size()-1){
-            return "#"+String.valueOf(count-eachLineDetail.size()+1);
+            return alarmingSign+String.valueOf(count-eachLineDetail.size()+1);
         }else {
             return eachLineDetail.get(eachLineDetail.size()-count-1);
         }

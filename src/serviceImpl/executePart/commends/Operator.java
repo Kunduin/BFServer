@@ -1,4 +1,6 @@
 package serviceImpl.executePart.commends;
+import service.IOService;
+import serviceImpl.IOpart.IOServiceImpl;
 import serviceImpl.IOpart.userSaveWork.FileList;
 import serviceImpl.IOpart.userSaveWork.UserSaveFile;
 
@@ -148,10 +150,12 @@ public class Operator {
 //        fileList.newFile("abc","Ook","12:33");
 //        fileList.updateFile("abc","Ook","123:42");
 //        System.out.println(fileList.checkFile("abc"));
-        UserSaveFile userSaveFile=new UserSaveFile("bay","abc","Ook");
-        userSaveFile.saveFile("asfddsadasdfads","12:99");
-        System.out.println(userSaveFile.readFile("12:99"));
-
+//        UserSaveFile userSaveFile=new UserSaveFile("bay","abc","Ook");
+//        userSaveFile.saveFile("asfddsadasdfads","12:99");
+//        System.out.println(userSaveFile.readFile("12:99"));
+        IOService ioService=new IOServiceImpl();
+        System.out.println(ioService.newProject("me","233","Ook"));
+        System.out.println(ioService.readFileList("me").toString());
     }
 
 }

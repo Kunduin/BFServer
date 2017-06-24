@@ -1,5 +1,6 @@
 package serviceImpl.IOpart.userSaveWork;
 
+import agreement.IOAgreement;
 import serviceImpl.IOpart.CurrentProject;
 import serviceImpl.IOpart.easyToIO.ReadAndWrite;
 
@@ -14,10 +15,15 @@ public class FileList {
     private String listFilePath;
     private String splitSign;
 
-    public FileList(String username){
+    public FileList(String username) throws IOException {
         this.username=username;
         this.listFilePath=username+".fileList";
-        this.splitSign="######";
+        this.splitSign= IOAgreement.SPLIT_SIGN;
+//        ReadAndWrite.write(listFilePath,"");
+//        FileWriter writer=new FileWriter(listFilePath);
+//        writer.write("");
+//        writer.flush();
+//        writer.close();
     }
 
     public ArrayList getFileList() throws IOException{
@@ -30,7 +36,9 @@ public class FileList {
         return true;
     }
     public boolean newFile(CurrentProject currentProject,String time) throws IOException{
+        System.out.println("newFile");
         String theLine=currentProject.getFilename()+splitSign+currentProject.getLanguage()+splitSign+time;
+        System.out.println("newFIle--");
         ReadAndWrite.write(listFilePath,theLine);
         return true;
     }
@@ -41,7 +49,9 @@ public class FileList {
         return true;
     }
     public boolean updateFile(CurrentProject currentProject,String time) throws IOException{
+        System.out.println("--delete");
         deleteFile(currentProject.getFilename());
+        System.out.println("delete--");
         newFile(currentProject,time);
         return true;
     }
@@ -68,6 +78,10 @@ public class FileList {
         ReadAndWrite.write(listFilePath,eachFileName);
 
         return true;
+    }
+
+    public ArrayList getAllFile() throws IOException {
+        return ReadAndWrite.read(listFilePath);
     }
 
 }

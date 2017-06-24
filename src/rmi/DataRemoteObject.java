@@ -3,6 +3,7 @@ package rmi;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 import service.ExecuteService;
 import service.IOService;
@@ -32,20 +33,23 @@ public class DataRemoteObject extends UnicastRemoteObject implements IOService, 
 	}
 
 	@Override
-	public String readFile(String userId, String fileName) throws RemoteException{
-		// TODO Auto-generated method stub
-		return iOService.readFile(userId, fileName);
+	public ArrayList getFileAllVersion(String userId) throws IOException{
+		return iOService.getFileAllVersion(userId);
 	}
 
 	@Override
-	public String readFileList(String userId) throws RemoteException{
-		// TODO Auto-generated method stub
+	public ArrayList readFileList(String userId) throws IOException {
 		return iOService.readFileList(userId);
 	}
 
 	@Override
 	public boolean newProject(String userId, String filename, String language) throws IOException {
 		return iOService.newProject(userId,filename,language);
+	}
+
+	@Override
+	public boolean oldProject(String userId, String filename, String language) throws IOException {
+		return iOService.oldProject(userId,filename,language);
 	}
 
 	@Override
@@ -80,13 +84,11 @@ public class DataRemoteObject extends UnicastRemoteObject implements IOService, 
 
 	@Override
 	public String login(String username, String password) throws IOException {
-		// TODO Auto-generated method stub
 		return userService.login(username, password);
 	}
 
 	@Override
 	public boolean logout(String username) throws RemoteException {
-		// TODO Auto-generated method stub
 		return userService.logout(username);
 	}
 

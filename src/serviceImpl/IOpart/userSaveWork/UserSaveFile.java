@@ -1,5 +1,6 @@
 package serviceImpl.IOpart.userSaveWork;
 
+import agreement.IOAgreement;
 import serviceImpl.IOpart.easyToIO.ReadAndWrite;
 
 import java.io.BufferedWriter;
@@ -19,11 +20,11 @@ public class UserSaveFile {
     private String splitSign;
     private FileList fileList;
 
-    public UserSaveFile(String username,String filename,String language){
+    public UserSaveFile(String username,String filename,String language) throws IOException {
         this.username=username;
         this.filename=filename;
         this.language=language;
-        this.splitSign="######";
+        this.splitSign= IOAgreement.SPLIT_SIGN;
         this.filePath=username+"."+filename+"."+language+".UserSaveFile";
         this.fileList=new FileList(username);
     }
@@ -47,5 +48,4 @@ public class UserSaveFile {
     public ArrayList getAllVersion() throws IOException{
         return ReadAndWrite.read(filePath);
     }
-
 }

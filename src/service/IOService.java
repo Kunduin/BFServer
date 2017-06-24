@@ -4,14 +4,18 @@ package service;
 import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 public interface IOService extends Remote{
 	public boolean writeFile(String file, String userId, String fileName)throws RemoteException;
+
+	public ArrayList getFileAllVersion(String userId) throws IOException;
 	
-	public String readFile(String userId, String fileName)throws RemoteException;
-	
-	public String readFileList(String userId)throws RemoteException;
+	public ArrayList readFileList(String userId) throws IOException;
 
 	public boolean newProject(String userId,String filename,String language) throws IOException;
+
+	public boolean oldProject(String userId,String filename,String language) throws IOException;
 
 	public boolean deleteProject(String userId,String filename,String language) throws IOException;
 

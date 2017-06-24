@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import service.IOService;
+import serviceImpl.IOpart.userSaveWork.FileList;
 
 public class IOServiceImpl implements IOService {
 
-    private HashMap<String, CurrentProject> map;
+    private HashMap<String, CurrentProject> map=new HashMap<>();
 
 
     @Override
@@ -29,27 +31,35 @@ public class IOServiceImpl implements IOService {
     }
 
     @Override
-    public String readFile(String userId, String fileName) {
-        // TODO Auto-generated method stub
-        return "OK";
+    public ArrayList getFileAllVersion(String userId) throws IOException {
+        return map.get(userId).getUserSaveFile().getAllVersion();
     }
 
     @Override
-    public String readFileList(String userId) {
+    public ArrayList readFileList(String userId) throws IOException {
         // TODO Auto-generated method stub
-        return "OK";
+        FileList fileList=new FileList(userId);
+        return fileList.getAllFile();
     }
 
 
     @Override
     public boolean newProject(String userId, String filename, String language) throws IOException {
         CurrentProject aNewProject = new CurrentProject(userId, filename, language);
+        System.out.println("??");
         if (aNewProject.getFileList().checkFile(filename)) {
             return false;
         } else {
             map.put(userId, aNewProject);
             return true;
         }
+    }
+
+    @Override
+    public boolean oldProject(String userId, String filename, String language) throws IOException {
+        CurrentProject anOldProject = new CurrentProject(userId, filename, language);
+        map.put(userId,anOldProject);
+        return true;
     }
 
     @Override
@@ -62,8 +72,12 @@ public class IOServiceImpl implements IOService {
 
     @Override
     public boolean userSave(String userId, String code, String time) throws IOException {
+        System.out.println("--userSave");
         CurrentProject currentProject = map.get(userId);
+        System.out.println("userSave");
+        System.out.println(currentProject.getFilename());
         currentProject.getFileList().updateFile(currentProject, time);
+        System.out.println("userSave--");
         currentProject.getUserSaveFile().saveFile(code, time);
         return true;
     }

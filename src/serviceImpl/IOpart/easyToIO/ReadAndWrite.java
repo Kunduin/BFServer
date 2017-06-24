@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class ReadAndWrite {
     public static ArrayList read(String filePath) throws IOException {
         ArrayList<String> eachLineDetail= new ArrayList<>();
+        System.out.println("?read");
         FileReader fileReader = new FileReader(filePath);
         BufferedReader reader = new BufferedReader(fileReader);
         String line;

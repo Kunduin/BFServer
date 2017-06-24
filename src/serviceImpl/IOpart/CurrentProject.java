@@ -4,6 +4,8 @@ import serviceImpl.IOpart.autoSaveWork.AutoSaveFile;
 import serviceImpl.IOpart.userSaveWork.FileList;
 import serviceImpl.IOpart.userSaveWork.UserSaveFile;
 
+import java.io.IOException;
+
 /**
  * Created by 15852 on 2017/6/22 0022.
  */
@@ -14,7 +16,7 @@ public class CurrentProject {
     private FileList fileList;
     private UserSaveFile userSaveFile;
     private AutoSaveFile autoSaveFile;
-    public CurrentProject(String username,String filename,String language){
+    public CurrentProject(String username,String filename,String language) throws IOException {
         this.username=username;
         this.filename=language;
         this.language=language;
@@ -29,13 +31,13 @@ public class CurrentProject {
         return filename;
     }
     public String getLanguage(){
-        return getLanguage();
+        return language;
     }
     public FileList getFileList(){
         return fileList;
     }
     public UserSaveFile getUserSaveFile(){
-        return getUserSaveFile();
+        return userSaveFile;
     }
     public AutoSaveFile getAutoSaveFile(){
         return autoSaveFile;
