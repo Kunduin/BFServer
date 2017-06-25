@@ -114,11 +114,11 @@ public class Operator {
     }
 
     public static void main(String[] args) throws Exception{
-//        Operator operator=new Operator(" ,>,,>++++++++[<------<------>>-]  <<[>[>+>+<<-]>>[<<+>>-]<<<-]  >>>++++++[<++++++++>-],<.>.","2 3" );
-//        operator.execute();
-//        System.out.println(operator.getResult());
-//        System.out.println(operator.getStack());
-//
+        Operator operator=new Operator(",>++++++[<-------->-],,[<+>-],<.>. ","4 3" );
+        operator.execute();
+        System.out.println(operator.getResult());
+        System.out.println(operator.getStack());
+
 //        ExecuteService executeService=new ExecuteServiceImpl();
 //        String ook=new String("Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.\n" +
 //                "Ook. Ook! Ook? Ook! Ook! Ook. Ook? Ook. Ook. Ook. Ook. Ook. Ook. Ook. Ook.\n" +
@@ -153,9 +153,9 @@ public class Operator {
 //        UserSaveFile userSaveFile=new UserSaveFile("bay","abc","Ook");
 //        userSaveFile.saveFile("asfddsadasdfads","12:99");
 //        System.out.println(userSaveFile.readFile("12:99"));
-        IOService ioService=new IOServiceImpl();
-        System.out.println(ioService.newProject("me","233","Ook"));
-        System.out.println(ioService.readFileList("me").toString());
+//        IOService ioService=new IOServiceImpl();
+//        System.out.println(ioService.newProject("me","233","Ook"));
+//        System.out.println(ioService.readFileList("me").toString());
     }
 
 }

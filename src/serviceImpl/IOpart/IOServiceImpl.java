@@ -45,18 +45,24 @@ public class IOServiceImpl implements IOService {
 
     @Override
     public boolean newProject(String userId, String filename, String language) throws IOException {
+        map.remove(userId);
         CurrentProject aNewProject = new CurrentProject(userId, filename, language);
         System.out.println("??");
-        if (aNewProject.getFileList().checkFile(filename)) {
-            return false;
-        } else {
-            map.put(userId, aNewProject);
+        try {
+            if (aNewProject.getFileList().checkFile(filename)) {
+                return false;
+            } else {
+                map.put(userId, aNewProject);
+                return true;
+            }
+        }catch (Exception e){
             return true;
         }
     }
 
     @Override
     public boolean oldProject(String userId, String filename, String language) throws IOException {
+        map.remove(userId);
         CurrentProject anOldProject = new CurrentProject(userId, filename, language);
         map.put(userId,anOldProject);
         return true;
